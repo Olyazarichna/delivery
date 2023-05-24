@@ -1,0 +1,16 @@
+.icon {
+    transition: transform 500ms ease-in-out;
+    &:hover,
+    &:focus {
+      transform: rotate(180deg);
+    }
+  }
+  .text {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+  }
+  .text_link {
+    margin-left: 20px;
+  }
+  

@@ -14,7 +14,8 @@ const Form=()=>{
         setFocusedInput(inputName);
     };
 
-const handleSubmit=()=>{
+const handleSubmit=(event)=>{
+    event.preventDefault();
     if (name.trim() === '' || email.trim === '') {
         alert('Name and email are required fields');
         return;

@@ -1,8 +1,11 @@
 .container {
   width: 50%;
+  height: 300px;
+  overflow-x: scroll;
+  border: 1px solid #000;
 }
-.list {
-}
+// .list {
+// }
 
 .list_item {
   display: flex;

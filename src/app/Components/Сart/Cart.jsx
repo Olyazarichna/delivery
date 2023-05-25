@@ -1,24 +1,51 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./Cart.module.scss";
 
 import EmptyCart from "../EmptyCart/EmptyCart";
 
 const Cart = () => {
-  const [amount, setAmount] = useState(1);
+  const [amounts, setAmounts] = useState({});
   const [totalPrice, setTotalPrice] = useState(0);
+  const [cartItems, setCartItems] = useState(
+    JSON.parse(localStorage.getItem("cartItems")) || []
+  );
 
-  const savedCartItems = localStorage.getItem("cartItems");
-  const cartItems = savedCartItems ? JSON.parse(savedCartItems) : [];
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
 
-  const decreaseAmount = () => {
-    if (amount > 1) {
-      setAmount(amount - 1);
+    const total = cartItems.reduce((accumulator, item) => {
+      const itemPrice = typeof item.price === "number" ? item.price : 0;
+      const itemAmount =
+        typeof amounts[item.id] === "number" ? amounts[item.id] : 1;
+      return accumulator + itemPrice * itemAmount;
+    }, 0);
+    setTotalPrice(total);
+  }, [cartItems, amounts]);
+
+  const handleRemove = (productId) => {
+    const updatedCart = cartItems.filter((item) => item.id !== productId);
+    setCartItems(updatedCart);
+    setAmounts((prevAmounts) => {
+      const { [productId]: removedAmount, ...newAmounts } = prevAmounts;
+      return newAmounts;
+    });
+  };
+
+  const decreaseAmount = (productId) => {
+    if (amounts[productId] > 1) {
+      setAmounts((prevAmounts) => ({
+        ...prevAmounts,
+        [productId]: prevAmounts[productId] - 1,
+      }));
     }
   };
 
-  const increaseAmount = () => {
-    setAmount(amount + 1);
+  const increaseAmount = (productId) => {
+    setAmounts((prevAmounts) => ({
+      ...prevAmounts,
+      [productId]: (prevAmounts[productId] || 0) + 1,
+    }));
   };
 
   return (
@@ -26,6 +53,7 @@ const Cart = () => {
       <ul className={styles.list}>
         {cartItems.length > 0 ? (
           cartItems.map(({ id, images, title, price }) => {
+            const amount = amounts[id] || 1;
             return (
               <li key={id} className={styles.list_item}>
                 <div className={styles.img_wrapper}>
@@ -39,17 +67,17 @@ const Cart = () => {
                 </div>
                 <div className={styles.text_wrapper}>
                   <p className={styles.list_desc}>Title: {title}</p>
-                  <p className={styles.list_desc}>Price: {price}</p>
+                  <p className={styles.list_desc}>Price: {price} $</p>
                   <div className={styles.btn_wrapper}>
                     <button
-                      onClick={decreaseAmount}
+                      onClick={() => decreaseAmount(id)}
                       className={styles.list_btn}
                     >
                       -
                     </button>
                     <span>{amount}</span>
                     <button
-                      onClick={increaseAmount}
+                      onClick={() => increaseAmount(id)}
                       className={styles.list_btn}
                     >
                       +
@@ -58,19 +86,21 @@ const Cart = () => {
                   <button
                     type="button"
                     className={styles.list_btn}
-                    // onClick={() => handleToggle(id)}
+                    onClick={() => handleRemove(id)}
                   >
                     remove
                   </button>
                 </div>
               </li>
-             
             );
           })
         ) : (
-            <EmptyCart/>
+          <EmptyCart />
         )}
-         <p>Total:{totalPrice}</p>
+        <p>
+          Total:
+          {totalPrice} $
+        </p>
       </ul>
     </div>
   );

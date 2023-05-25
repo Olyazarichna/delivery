@@ -2,7 +2,7 @@
 import { useState } from "react";
 import styles from "./Form.module.scss";
 
-const Form = () => {
+const Form = ({ cartItems, totalPrice, handleFormSubmit }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -13,14 +13,6 @@ const Form = () => {
     setFocusedInput(inputName);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (name.trim() === "" || email.trim === "") {
-      alert("Name and email are required fields");
-      return;
-    }
-    console.log("send");
-  };
   const handleChange = (event) => {
     const { name, value } = event.target;
     switch (name) {
@@ -39,6 +31,35 @@ const Form = () => {
       default:
         break;
     }
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (name.trim() === "" || email.trim() === "") {
+      alert("Name and email are required fields");
+      return;
+    }
+
+    const formData = {
+      name,
+      email,
+      phone,
+      address,
+      cartItems,
+      totalPrice,
+    };
+
+    handleFormSubmit(formData);
+    formReset();
+  };
+  console.log("FORM Cart Items:", cartItems); 
+  console.log("FORM Total Price:", totalPrice);
+
+  const formReset = () => {
+    setName("");
+    setEmail("");
+    setPhone("");
+    setAddress("");
   };
 
   return (

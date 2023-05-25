@@ -1,12 +1,9 @@
-import Cart from "../Components/Сart/Cart";
-import Form from "../Components/Form/Form";
-import styles from './page.module.scss';
+import ShoppingCart from "../Components/ShoppingCart/ShoppingCart";
 
 export default function Page() {
     return (
-        <section className={styles.wrapper}>
-            <Form />
-            <Cart />
-        </section>
+        <>
+            <ShoppingCart />
+        </>
     );
 }

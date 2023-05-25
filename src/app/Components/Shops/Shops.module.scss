@@ -1,25 +1,34 @@
+@import "../../../scss/utils/mixin";
+
 .main {
   background-color: rgba(0, 0, 0, 0.1);
+  @include mq(tablet){
   display: flex;
+  }
 }
 .nav {
-  width: 30%;
-  padding: 40px 20px;
   background: #283048;
   background: -webkit-linear-gradient(#283048, #859398);
   background: linear-gradient(#283048, #859398);
+  padding: 20px;
+  @include mq(tablet) {
+    width: 30%;
+    padding: 40px 20px;
+  }
 }
 .nav_title {
   color: #fff;
-  font-weight: 700;
-  font-size: 24px;
+  font-size: 14px;
+  @include mq(tablet) {
+    font-weight: 700;
+    font-size: 24px;
+  }
 }
 .nav_listItem {
   text-transform: capitalize;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 12px;
   text-align: center;
-  width: 70%;
   background-color: #fff;
   margin-top: 10px;
   border-radius: 4px;
@@ -27,6 +36,10 @@
   &:hover,
   &:focus {
     transform: scale(1.1);
+  }
+  @include mq(tablet) {
+    width: 70%;
+    font-size: 16px;
   }
 }
 .nav_link {
@@ -39,7 +52,7 @@
   margin: 0 auto;
 }
 
-.active{
+.active {
   border-radius: 4px;
   background-color: rgb(255, 213, 0);
 }

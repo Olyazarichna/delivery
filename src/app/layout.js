@@ -1,4 +1,3 @@
-
 import '../scss/main.scss';
 import { Inter } from "next/font/google";
 import Header from './Components/Header/Header.jsx';

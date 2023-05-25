@@ -1,7 +1,7 @@
 "use client";
+
 import { useState, useEffect } from "react";
 import styles from "./Cart.module.scss";
-
 import EmptyCart from "../EmptyCart/EmptyCart";
 
 const Cart = () => {
@@ -10,7 +10,8 @@ const Cart = () => {
   const [cartItems, setCartItems] = useState(
     JSON.parse(localStorage.getItem("cartItems")) || []
   );
-
+  console.log("Cart Items:", cartItems); 
+  console.log("Total Price:", totalPrice);
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
 
@@ -23,7 +24,7 @@ const Cart = () => {
     setTotalPrice(total);
   }, [cartItems, amounts]);
 
-  const handleRemove = (productId) => {
+const handleRemove = (productId) => {
     const updatedCart = cartItems.filter((item) => item.id !== productId);
     setCartItems(updatedCart);
     setAmounts((prevAmounts) => {
@@ -31,6 +32,7 @@ const Cart = () => {
       return newAmounts;
     });
   };
+
 
   const decreaseAmount = (productId) => {
     if (amounts[productId] > 1) {
@@ -97,10 +99,12 @@ const Cart = () => {
         ) : (
           <EmptyCart />
         )}
-        <p>
-          Total:
-          {totalPrice} $
-        </p>
+        {totalPrice > 0 && (
+          <p className={styles.total}>
+            Total price:
+            {totalPrice} $
+          </p>
+        )}
       </ul>
     </div>
   );

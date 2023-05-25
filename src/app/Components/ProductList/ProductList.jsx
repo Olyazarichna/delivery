@@ -50,7 +50,7 @@ const ProductList = ({ products }) => {
                   type="button"
                   className={styles.list_btn}
                   onClick={() => handleToggle(id)}
-                >         
+                >
                   {!isInCart ? "add to Cart" : "remove"}
                 </button>
               </li>

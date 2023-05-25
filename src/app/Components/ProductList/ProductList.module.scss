@@ -1,17 +1,24 @@
+@import "../../../scss/utils/mixin";
+
 .list {
-  display: grid;
-  grid-template-columns: 300px 1fr;
-  gap: 20px;
+  @include mq(tablet) {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 20px;
+  }
 }
 .list_item {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 300px;
-  border-radius: 4px;
-  padding: 20px;
   background-color: #fff;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+  padding: 10px;
+  @include mq(tablet) {
+    width: 300px;
+    padding: 20px;
+  }
 }
 .img_wrapper {
   width: 260px;

@@ -1,17 +1,21 @@
+@import "../../../scss/utils/mixin";
+
 .container {
-  width: 50%;
   height: 300px;
   overflow-x: scroll;
-  border: 1px solid #000;
+  padding: 20px;
+  @include mq(tablet) {
+    width: 40%;
+  }
 }
-// .list {
-// }
 
 .list_item {
   display: flex;
-  border-radius: 4px;
-  padding: 20px;
-  background-color: #fff;
+  justify-content: space-between;
+  align-items: center;
+  &:not(:first-child) {
+    margin-top: 20px;
+  }
 }
 .img_wrapper {
   width: 100px;
@@ -22,10 +26,9 @@
 .list_desc {
   font-size: 14px;
   font-weight: 600;
-  &:not(:first-child){
-     margin-top: 6px;
+  &:not(:first-child) {
+    margin-top: 6px;
   }
- 
 }
 .btn_wrapper {
   border: 1px solid #ec8c2c;
@@ -55,4 +58,8 @@
     text-shadow: 1px 1px 2px #427388;
     background: #eac224;
   }
+}
+.total {
+  font-weight: 600;
+  margin-top: 20px;
 }

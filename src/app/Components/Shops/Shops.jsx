@@ -15,23 +15,38 @@ const Shops = () => {
   useEffect(() => {
     const fetchData = async () => {
       const fetchedShops = await getShops();
-      setSelectedShop("smartphones");
       setShops(fetchedShops);
-      const fetchedProducts = await getProducts("smartphones");
-      setProducts(fetchedProducts);
     };
     fetchData();
   }, []);
 
+  useEffect(() => {
+    if (selectedShop !== "") {
+      const fetchProducts = async () => {
+        const fetchedProducts = await getProducts(selectedShop);
+        setProducts(fetchedProducts);
+      };
+      fetchProducts();
+    }
+  }, [selectedShop]);
+
   const handleClick = async (shop) => {
     try {
       setSelectedShop(shop);
-      const data = await getProducts(shop);
-      setProducts(data);
     } catch (error) {
       console.log("Error:", error);
     }
   };
+
+  // const handleClick = async (shop) => {
+  //   try {
+  //     setSelectedShop(shop);
+  //     const data = await getProducts(shop);
+  //     setProducts(data);
+  //   } catch (error) {
+  //     console.log("Error:", error);
+  //   }
+  // };
   console.log("selectedShop", selectedShop);
   return (
     <section className={styles.main}>

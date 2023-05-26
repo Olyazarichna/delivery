@@ -33,8 +33,8 @@ console.log('selectedShop',selectedShop);
   const handleClick = async (shop) => {
     try {
       const data = await getProducts(shop);
-      setProducts(data);
       setSelectedShop(shop);
+      setProducts(data);
     } catch (error) {
       console.log("Error:", error);
     }

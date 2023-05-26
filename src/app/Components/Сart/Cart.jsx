@@ -1,5 +1,6 @@
 "use client";
-
+import { useEffect } from "react";
+import Cookies from 'js-cookie';
 import styles from "./Cart.module.scss";
 import EmptyCart from "../EmptyCart/EmptyCart";
 
@@ -21,13 +22,17 @@ const Cart = ({ cartItems, setCartItems, amounts, setAmounts }) => {
       }));
     }
   };
-
+  
   const increaseAmount = (productId) => {
     setAmounts((prevAmounts) => ({
       ...prevAmounts,
       [productId]: (prevAmounts[productId] || 0) + 1,
     }));
   };
+
+  useEffect(() => {
+    Cookies.set('amounts', JSON.stringify(amounts));
+  }, [amounts]);
 
   return (
     <div className={styles.container}>

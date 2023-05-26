@@ -10,15 +10,16 @@ import { getProducts } from "@/app/services/getProducts";
 const Shops = () => {
   const [shops, setShops] = useState([]);
   const [products, setProducts] = useState([]);
-  const [selectedShop, setSelectedShop] = useState("smartphones");
-console.log('selectedShop',selectedShop)
+  const [selectedShop, setSelectedShop] = useState("");
+
   useEffect(() => {
     const getData = async () => {
       const fetchedShops = await getShops();
       setShops(fetchedShops);
+      setSelectedShop('smartphones')
     };
     getData();
-  }, []);
+  }, [selectedShop]);
 
   const handleClick = async (shop) => {
     try {

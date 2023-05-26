@@ -12,41 +12,33 @@ const Shops = () => {
   const [products, setProducts] = useState([]);
   const [selectedShop, setSelectedShop] = useState("");
 
+ 
   useEffect(() => {
     const fetchData = async () => {
       const fetchedShops = await getShops();
       setShops(fetchedShops);
+      setSelectedShop('smartphones'); 
     };
     fetchData();
   }, []);
 
   useEffect(() => {
-    if (selectedShop !== "") {
-      const fetchProducts = async () => {
+    const fetchProducts = async () => {
+      if (selectedShop) {
         const fetchedProducts = await getProducts(selectedShop);
         setProducts(fetchedProducts);
-      };
-      fetchProducts();
-    }
+      }
+    };
+    fetchProducts();
   }, [selectedShop]);
 
   const handleClick = async (shop) => {
     try {
       setSelectedShop(shop);
     } catch (error) {
-      console.log("Error:", error);
+      console.log('Error:', error);
     }
   };
-
-  // const handleClick = async (shop) => {
-  //   try {
-  //     setSelectedShop(shop);
-  //     const data = await getProducts(shop);
-  //     setProducts(data);
-  //   } catch (error) {
-  //     console.log("Error:", error);
-  //   }
-  // };
   console.log("selectedShop", selectedShop);
   return (
     <section className={styles.main}>

@@ -21,7 +21,7 @@ const Shops = () => {
       setProducts(fetchedProducts);
     };
     fetchData();
-  }, [selectedShop]);
+  }, []);
 
   useEffect(() => {
     const getData = async () => {

@@ -14,27 +14,19 @@ const Shops = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const fetchedProducts = await getProducts(selectedShop);
+      const fetchedShops = await getShops();
+      setSelectedShop("smartphones");
+      setShops(fetchedShops);
+      const fetchedProducts = await getProducts("smartphones");
       setProducts(fetchedProducts);
     };
     fetchData();
   }, []);
 
-  useEffect(() => {
-    const getData = async () => {
-      const fetchedShops = await getShops();
-      setShops(fetchedShops);
-      setSelectedShop("smartphones");
-    };
-    getData();
-  }, []);
-
   const handleClick = async (shop) => {
     try {
+      setSelectedShop(shop);
       const data = await getProducts(shop);
-      console.log("data", data);
-      console.log("shop", shop);
-      // setSelectedShop(shop);
       setProducts(data);
     } catch (error) {
       console.log("Error:", error);

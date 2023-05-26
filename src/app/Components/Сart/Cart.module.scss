@@ -4,8 +4,8 @@
   height: 300px;
   overflow-x: scroll;
   padding: 20px;
-  @include mq(tablet) {
-    width: 40%;
+  @include mq(desktop) {
+    width: 400px;
   }
 }
 
@@ -59,7 +59,4 @@
     background: #eac224;
   }
 }
-.total {
-  font-weight: 600;
-  margin-top: 20px;
-}
+

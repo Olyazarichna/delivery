@@ -8,11 +8,11 @@ import ProductList from "../ProductList/ProductList";
 const Shops = () => {
   const [shops, setShops] = useState([]);
   const [products, setProducts] = useState([]);
-  const [selectedShop, setSelectedShop] = useState('');
+  const [selectedShop, setSelectedShop] = useState("");
 
   useEffect(() => {
     getShops();
-    handleClick('smartphones');
+    handleClick("smartphones");
   }, []);
 
   const getShops = async () => {
@@ -49,9 +49,9 @@ const Shops = () => {
                 <Link
                   href="/"
                   onClick={() => handleClick(shop)}
-                  className={`${styles.nav_link} ${shop === selectedShop ? styles.active : ''}`}
-                  // className={styles.nav_link}
-                  // target="_blank"
+                  className={`${styles.nav_link} ${
+                    shop === selectedShop ? styles.active : ""
+                  }`}
                 >
                   {shop}
                 </Link>
@@ -63,8 +63,11 @@ const Shops = () => {
         </ul>
       </div>
       <div className={styles.productsWrapper}>
-        {products ? <ProductList products={products.products} 
-           /> : <p>...Loading</p>}
+        {products ? (
+          <ProductList products={products.products} />
+        ) : (
+          <p>...Loading</p>
+        )}
       </div>
     </section>
   );

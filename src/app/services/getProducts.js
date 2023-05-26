@@ -8,6 +8,4 @@ export const getProducts = async (shop) => {
     } catch (error) {
         console.log("Error:", error);
     }
-
-
 }

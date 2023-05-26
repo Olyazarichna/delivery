@@ -4,33 +4,25 @@ import { useState, useEffect } from "react";
 import styles from "./Shops.module.scss";
 import Link from "next/link";
 import ProductList from "../ProductList/ProductList";
+import { getShops } from "@/app/services/getShops";
+import { getProducts } from "@/app/services/getProducts";
 
 const Shops = () => {
   const [shops, setShops] = useState([]);
   const [products, setProducts] = useState([]);
-  const [selectedShop, setSelectedShop] = useState("");
-
+  const [selectedShop, setSelectedShop] = useState("smartphones");
+console.log('selectedShop',selectedShop)
   useEffect(() => {
-    getShops();
-    handleClick("smartphones");
+    const getData = async () => {
+      const fetchedShops = await getShops();
+      setShops(fetchedShops);
+    };
+    getData();
   }, []);
-
-  const getShops = async () => {
-    try {
-      const response = await fetch("https://dummyjson.com/products/categories");
-      const data = await response.json();
-      setShops(data);
-    } catch (error) {
-      console.log("Error:", error);
-    }
-  };
 
   const handleClick = async (shop) => {
     try {
-      const response = await fetch(
-        `https://dummyjson.com/products/category/${shop}`
-      );
-      const data = await response.json();
+      const data = await getProducts(shop);
       setProducts(data);
       setSelectedShop(shop);
     } catch (error) {

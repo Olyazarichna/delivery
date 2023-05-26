@@ -48,7 +48,13 @@ const Shops = () => {
           {shops ? (
             shops.map((shop, id) => (
               <li className={styles.nav_listItem} key={id}>
-                <Link
+                <button onClick={() => handleClick(shop)}
+                  className={`${styles.nav_link} ${
+                    shop === selectedShop ? styles.active : ""
+                  }`}>
+                {shop}
+                </button>
+                {/* <Link
                   href="/"
                   onClick={() => handleClick(shop)}
                   className={`${styles.nav_link} ${
@@ -56,7 +62,7 @@ const Shops = () => {
                   }`}
                 >
                   {shop}
-                </Link>
+                </Link> */}
               </li>
             ))
           ) : (

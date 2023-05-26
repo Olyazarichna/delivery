@@ -10,16 +10,25 @@ import { getProducts } from "@/app/services/getProducts";
 const Shops = () => {
   const [shops, setShops] = useState([]);
   const [products, setProducts] = useState([]);
-  const [selectedShop, setSelectedShop] = useState("");
+  const [selectedShop, setSelectedShop] = useState("smartphones");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const fetchedProducts = await getProducts(selectedShop);
+      setProducts(fetchedProducts);
+    };
+
+    fetchData();
+  }, [selectedShop]);
 
   useEffect(() => {
     const getData = async () => {
       const fetchedShops = await getShops();
       setShops(fetchedShops);
-      setSelectedShop('smartphones')
     };
+
     getData();
-  }, [selectedShop]);
+  }, []);
 
   const handleClick = async (shop) => {
     try {

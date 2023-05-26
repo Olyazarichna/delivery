@@ -14,9 +14,10 @@ const Shops = () => {
 
 
   useEffect(() => {
+
     const fetchData = async () => {
-      // setSelectedShop('smartphones');
-      const fetchedProducts = await getProducts(selectedShop);
+    //   // setSelectedShop('smartphones');
+      const fetchedProducts = await getProducts('smartphones');
       setProducts(fetchedProducts);
     };
     fetchData();

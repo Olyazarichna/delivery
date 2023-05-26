@@ -1,15 +1,17 @@
 "use client";
 import { useState, useEffect } from "react";
 import styles from "./ProductList.module.scss";
+import Cookies from "js-cookie";
 
 const ProductList = ({ products }) => {
-  const [cartItems, setCartItems] = useState(
-    JSON.parse(localStorage.getItem("cartItems")) || []
-  );
+  const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-  }, [cartItems]);
+    const savedCartItems = Cookies.get("cartItems");
+    if (savedCartItems) {
+      setCartItems(JSON.parse(savedCartItems));
+    }
+  }, []);
 
   const handleToggle = (productId) => {
     const isInCart = cartItems.some((item) => item.id === productId);
@@ -22,6 +24,11 @@ const ProductList = ({ products }) => {
       setCartItems([...cartItems, selectedItem]);
     }
   };
+
+  useEffect(() => {
+    Cookies.set("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
+
   return (
     <ul className={styles.list}>
       {products &&

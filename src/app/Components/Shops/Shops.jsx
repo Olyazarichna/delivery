@@ -11,7 +11,7 @@ const Shops = () => {
   const [shops, setShops] = useState([]);
   const [products, setProducts] = useState([]);
   const [selectedShop, setSelectedShop] = useState("smartphones");
-
+console.log('selectedShop',selectedShop);
   useEffect(() => {
     const fetchData = async () => {
       const fetchedProducts = await getProducts(selectedShop);

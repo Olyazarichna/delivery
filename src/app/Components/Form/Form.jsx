@@ -76,10 +76,10 @@ const Form = ({ cartItems, totalPrice, setCartItems }) => {
         >
           <div className={styles.form_wrapper}>
             <label
-              htmlFor="name"
-              className={`${styles.form_label} ${
-                focusedInput === "name" || name !== "" ? styles.focused : ""
-              }`}
+               htmlFor="name"
+               className={`${styles.form_label} ${
+                 focusedInput === "name" || name !== "" ? styles.focused : ""
+               }`}
             >
               Name
             </label>

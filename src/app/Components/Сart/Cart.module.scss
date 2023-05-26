@@ -59,4 +59,7 @@
     background: #eac224;
   }
 }
-
+.list_btn_remove{
+  @extend .list_btn;
+  margin-top: 6px;
+}

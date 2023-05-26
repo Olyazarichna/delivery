@@ -66,7 +66,7 @@ const Cart = ({ cartItems, setCartItems, amounts, setAmounts }) => {
                   </div>
                   <button
                     type="button"
-                    className={styles.list_btn}
+                    className={styles.list_btn_remove}
                     onClick={() => handleRemove(id)}
                   >
                     remove

@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import styles from "./Shops.module.scss";
-import Link from "next/link";
 import ProductList from "../ProductList/ProductList";
 import { getShops } from "@/app/services/getShops";
 import { getProducts } from "@/app/services/getProducts";
@@ -12,12 +11,11 @@ const Shops = () => {
   const [products, setProducts] = useState([]);
   const [selectedShop, setSelectedShop] = useState("");
 
- 
   useEffect(() => {
     const fetchData = async () => {
       const fetchedShops = await getShops();
       setShops(fetchedShops);
-      setSelectedShop('smartphones'); 
+      setSelectedShop("smartphones");
     };
     fetchData();
   }, []);
@@ -36,10 +34,10 @@ const Shops = () => {
     try {
       setSelectedShop(shop);
     } catch (error) {
-      console.log('Error:', error);
+      console.log("Error:", error);
     }
   };
-  console.log("selectedShop", selectedShop);
+
   return (
     <section className={styles.main}>
       <div className={styles.nav}>
@@ -48,21 +46,14 @@ const Shops = () => {
           {shops ? (
             shops.map((shop, id) => (
               <li className={styles.nav_listItem} key={id}>
-                <button onClick={() => handleClick(shop)}
-                  className={`${styles.nav_link} ${
-                    shop === selectedShop ? styles.active : ""
-                  }`}>
-                {shop}
-                </button>
-                {/* <Link
-                  href="/"
+                <button
                   onClick={() => handleClick(shop)}
                   className={`${styles.nav_link} ${
                     shop === selectedShop ? styles.active : ""
                   }`}
                 >
                   {shop}
-                </Link> */}
+                </button>
               </li>
             ))
           ) : (

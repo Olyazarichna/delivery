@@ -10,14 +10,15 @@ import { getProducts } from "@/app/services/getProducts";
 const Shops = () => {
   const [shops, setShops] = useState([]);
   const [products, setProducts] = useState([]);
-  const [selectedShop, setSelectedShop] = useState("smartphones");
-console.log('selectedShop',selectedShop);
+  const [selectedShop, setSelectedShop] = useState("");
+
+
   useEffect(() => {
     const fetchData = async () => {
+      // setSelectedShop('smartphones');
       const fetchedProducts = await getProducts(selectedShop);
       setProducts(fetchedProducts);
     };
-
     fetchData();
   }, [selectedShop]);
 
@@ -26,20 +27,21 @@ console.log('selectedShop',selectedShop);
       const fetchedShops = await getShops();
       setShops(fetchedShops);
     };
-
     getData();
   }, []);
 
   const handleClick = async (shop) => {
     try {
       const data = await getProducts(shop);
-      setSelectedShop(shop);
+      console.log('data', data);
+      console.log('shop', shop);
+      // setSelectedShop(shop);
       setProducts(data);
     } catch (error) {
       console.log("Error:", error);
     }
   };
-
+  console.log("selectedShop", selectedShop);
   return (
     <section className={styles.main}>
       <div className={styles.nav}>
